@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>VidaCore</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Arial;
+  background:#dff4ff;
+  text-align:center;
+}
+
+header{
+  background:#42a5f5;
+  color:white;
+  padding:15px;
+  font-size:32px;
+  font-weight:bold;
+}
+
+#topo{
+  background:white;
+  padding:10px;
+  border-bottom:4px solid #42a5f5;
+}
+
+#tempo,#dinheiro{
+  font-size:22px;
+  margin:5px;
+}
+
+#dinheiro{
+  color:green;
+}
+
+#status{
+  margin:10px;
+  min-height:50px;
+  font-weight:bold;
+  color:#0066aa;
+  font-size:18px;
+}
+
+#casa{
+  width:95%;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:10px;
+  margin-top:20px;
+}
+
+.comodo{
+  background:white;
+  border:3px solid #555;
+  border-radius:12px;
+  padding:10px;
+}
+
+.personagem{
+  font-size:30px;
+  margin:10px;
+}
+
+.info{
+  font-size:18px;
+  margin:5px;
+}
+
+button{
+  padding:10px;
+  margin:4px;
+  border:none;
+  border-radius:8px;
+  background:#42a5f5;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1e88e5;
+}
+
+select,input{
+  padding:10px;
+  margin:5px;
+  border-radius:8px;
+}
+
+.barra{
+  width:100%;
+  height:25px;
+  background:#ddd;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:5px;
+}
+
+.progresso{
+  height:100%;
+  width:0%;
+  color:white;
+  font-weight:bold;
+  line-height:25px;
+}
+
+.xixi{
+  background:#fdd835;
+}
+
+.coco{
+  background:#6d4c41;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+👶 VIDA CORE
+</header>
+
+<div id="topo">
+
+<div id="tempo">
+🌞 Manhã - 06:00
+</div>
+
+<div id="dinheiro">
+💰 Dinheiro: 100
+</div>
+
+<div id="status">
+🏠 Bem-vindo ao VidaCore!
+</div>
+
+</div>
+
+<div id="casa">
+
+<!-- THIAGO -->
+
+<div class="comodo">
+
+<h2>👶 Thiago</h2>
+
+<div class="personagem">
+👶🧷
+</div>
+
+<div class="info">
+😊 Calmo
+</div>
+
+<div class="barra">
+<div class="progresso xixi" id="barraThiago">
+🟡 0%
+</div>
+</div>
+
+<input id="tempoThiago" type="number" placeholder="Segundos do xixi">
+
+<br>
+
+<button onclick="darAguaThiago()">
+💧 Dar Água
+</button>
+
+<button onclick="trocarFralda('Thiago')">
+🧷 Trocar Fralda
+</button>
+
+</div>
+
+<!-- EMERSON -->
+
+<div class="comodo">
+
+<h2>👶 Emerson</h2>
+
+<div class="personagem">
+👶💩
+</div>
+
+<div class="info">
+😡 Faz bagunça
+</div>
+
+<div class="barra">
+<div class="progresso coco" id="barraEmerson">
+🟤 0%
+</div>
+</div>
+
+<input id="tempoEmerson" type="number" placeholder="Segundos do cocô">
+
+<br>
+
+<button onclick="darMamadeiraEmerson()">
+🍼 Dar Mamadeira
+</button>
+
+<button onclick="trocarFralda('Emerson')">
+🧷 Trocar Fralda
+</button>
+
+</div>
+
+<!-- EDILSON -->
+
+<div class="comodo">
+
+<h2>🤰 Edilson</h2>
+
+<div class="personagem" id="emojiEdilson">
+🤰
+</div>
+
+<div class="info" id="gravidezTxt">
+📈 Gravidez: 0%
+</div>
+
+<div class="barra">
+<div class="progresso xixi" id="barraEdilsonXixi">
+🟡 0%
+</div>
+</div>
+
+<div class="barra">
+<div class="progresso coco" id="barraEdilsonCoco">
+🟤 0%
+</div>
+</div>
+
+<input id="tempoEdilson" type="number" placeholder="Segundos">
+
+<br>
+
+<button onclick="encherBolsaXixi()">
+🟡 Encher Bolsa Xixi
+</button>
+
+<button onclick="encherBolsaCoco()">
+🟤 Encher Bolsa Cocô
+</button>
+
+<br>
+
+<button onclick="acelerarGravidez()">
+⚡ Acelerar Gravidez
+</button>
+
+<button onclick="darAguaEdilson()">
+💧 Água
+</button>
+
+<button onclick="darMamaEdilson()">
+🍼 Mamadeira
+</button>
+
+<button onclick="trocarFralda('Edilson')">
+🧷 Trocar Fralda
+</button>
+
+</div>
+
+<!-- LOJA -->
+
+<div class="comodo">
+
+<h2>🏪 Loja de Fraldas</h2>
+
+<div class="info">
+🧷 Fraldas: <span id="fraldas">5</span>
+</div>
+
+<select id="tipoFralda">
+
+<option value="⬜ Padrão">
+⬜ Padrão - Grátis
+</option>
+
+<option value="🟫 Piquitunho">
+🟫 Piquitunho - $1.99
+</option>
+
+<option value="🟦 Turma da Mônica">
+🟦 Turma da Mônica - $2.99
+</option>
+
+<option value="🟩 Huggies">
+🟩 Huggies - $3.99
+</option>
+
+<option value="🟪 Personal">
+🟪 Personal - $4.99
+</option>
+
+<option value="🟨 Pampers">
+🟨 Pampers - $9.99
+</option>
+
+</select>
+
+<br>
+
+<button onclick="comprarFralda()">
+🛒 Comprar Fralda
+</button>
+
+</div>
+
+<!-- EVENTOS -->
+
+<div class="comodo">
+
+<h2>🌧️ Eventos</h2>
+
+<button onclick="eventoAleatorio()">
+🎲 Evento Aleatório
+</button>
+
+<button onclick="limparCasa()">
+🧹 Limpar Casa
+</button>
+
+<button onclick="dormir()">
+😴 Dormir
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let dinheiro = 100;
+let fraldas = 5;
+
+let gravidez = 0;
+let edilsonNasceu = false;
+
+let hora = 6;
+
+let thiagoFazendo = false;
+let emersonFazendo = false;
+let edilsonFazendo = false;
+
+let bolsaXixi = 0;
+let bolsaCoco = 0;
+
+// TEMPO
+
+setInterval(()=>{
+
+  hora++;
+
+  if(hora>=24){
+    hora=0;
+  }
+
+  atualizarHora();
+
+},5000);
+
+function atualizarHora(){
+
+  let periodo="";
+
+  if(hora>=6 && hora<12){
+    periodo="🌞 Manhã";
+  }
+
+  else if(hora>=12 && hora<18){
+    periodo="☀️ Tarde";
+  }
+
+  else if(hora>=18 && hora<22){
+    periodo="🌆 Noite";
+  }
+
+  else{
+    periodo="🌙 Madrugada";
+  }
+
+  document.getElementById("tempo").innerText =
+  periodo + " - " + hora + ":00";
+}
+
+// THIAGO
+
+function darAguaThiago(){
+
+  let tempo =
+  Number(document.getElementById("tempoThiago").value);
+
+  if(tempo<=0){
+    tempo=5;
+  }
+
+  thiagoFazendo = true;
+
+  let atual = 0;
+
+  let intervalo = setInterval(()=>{
+
+    atual++;
+
+    let porcentagem =
+    (atual/tempo)*100;
+
+    let barra =
+    document.getElementById("barraThiago");
+
+    barra.style.width =
+    porcentagem + "%";
+
+    barra.innerText =
+    "🟡 " + Math.floor(porcentagem) + "%";
+
+    document.getElementById("status").innerText =
+    "😭 Thiago está fazendo xixi, espera " +
+    (tempo-atual) + " segundos";
+
+    if(atual>=tempo){
+
+      clearInterval(intervalo);
+
+      thiagoFazendo = false;
+
+      document.getElementById("status").innerText =
+      "🟡 Thiago terminou o xixi!";
+
+      verificarVazamento("xixi");
+    }
+
+  },1000);
+
+}
+
+// EMERSON
+
+function darMamadeiraEmerson(){
+
+  let tempo =
+  Number(document.getElementById("tempoEmerson").value);
+
+  if(tempo<=0){
+    tempo=5;
+  }
+
+  emersonFazendo = true;
+
+  let atual = 0;
+
+  let intervalo = setInterval(()=>{
+
+    atual++;
+
+    let porcentagem =
+    (atual/tempo)*100;
+
+    let barra =
+    document.getElementById("barraEmerson");
+
+    barra.style.width =
+    porcentagem + "%";
+
+    barra.innerText =
+    "🟤 " + Math.floor(porcentagem) + "%";
+
+    document.getElementById("status").innerText =
+    "😡 Emerson está fazendo cocô, espera " +
+    (tempo-atual) + " segundos";
+
+    if(atual>=tempo){
+
+      clearInterval(intervalo);
+
+      emersonFazendo = false;
+
+      document.getElementById("status").innerText =
+      "🟤 Emerson terminou o cocô!";
+
+      verificarVazamento("coco");
+    }
+
+  },1000);
+
+}
+
+// EDILSON ANTES
+
+function encherBolsaXixi(){
+
+  if(edilsonNasceu)return;
+
+  bolsaXixi += 10;
+
+  let barra =
+  document.getElementById("barraEdilsonXixi");
+
+  barra.style.width =
+  bolsaXixi + "%";
+
+  barra.innerText =
+  "🟡 " + bolsaXixi + "%";
+
+  document.getElementById("status").innerText =
+  "🤰 Bolsa de xixi aumentou!";
+}
+
+function encherBolsaCoco(){
+
+  if(edilsonNasceu)return;
+
+  bolsaCoco += 10;
+
+  let barra =
+  document.getElementById("barraEdilsonCoco");
+
+  barra.style.width =
+  bolsaCoco + "%";
+
+  barra.innerText =
+  "🟤 " + bolsaCoco + "%";
+
+  document.getElementById("status").innerText =
+  "🤰 Bolsa de cocô aumentou!";
+
+  if(bolsaXixi>=100 || bolsaCoco>=100){
+
+    document.getElementById("status").innerText =
+    "💥 A bolsa do Edilson estourou!";
+  }
+
+}
+
+// NASCIMENTO
+
+function acelerarGravidez(){
+
+  if(edilsonNasceu)return;
+
+  gravidez += 10;
+
+  document.getElementById("gravidezTxt").innerText =
+  "📈 Gravidez: " + gravidez + "%";
+
+  if(gravidez>=100){
+
+    nascerEdilson();
+  }
+
+}
+
+function nascerEdilson(){
+
+  edilsonNasceu = true;
+
+  document.getElementById("emojiEdilson").innerText =
+  "👶";
+
+  document.getElementById("gravidezTxt").innerText =
+  "😈 Necessidades Duplas";
+
+  document.getElementById("status").innerText =
+  "👶 Edilson nasceu!";
+}
+
+// EDILSON DEPOIS
+
+function darAguaEdilson(){
+
+  if(!edilsonNasceu)return;
+
+  let tempo =
+  Number(document.getElementById("tempoEdilson").value);
+
+  if(tempo<=0){
+    tempo=5;
+  }
+
+  edilsonFazendo = true;
+
+  let atual = 0;
+
+  let intervalo = setInterval(()=>{
+
+    atual++;
+
+    let porcentagem =
+    (atual/tempo)*100;
+
+    let barra =
+    document.getElementById("barraEdilsonXixi");
+
+    barra.style.width =
+    porcentagem + "%";
+
+    barra.innerText =
+    "🟡 " + Math.floor(porcentagem) + "%";
+
+    document.getElementById("status").innerText =
+    "😭 Edilson está fazendo xixi, espera " +
+    (tempo-atual) + " segundos";
+
+    if(atual>=tempo){
+
+      clearInterval(intervalo);
+
+      edilsonFazendo = false;
+
+      document.getElementById("status").innerText =
+      "🟡 Edilson terminou o xixi!";
+
+      verificarVazamento("xixi");
+    }
+
+  },1000);
+
+}
+
+function darMamaEdilson(){
+
+  if(!edilsonNasceu)return;
+
+  let tempo =
+  Number(document.getElementById("tempoEdilson").value);
+
+  if(tempo<=0){
+    tempo=5;
+  }
+
+  edilsonFazendo = true;
+
+  let atual = 0;
+
+  let intervalo = setInterval(()=>{
+
+    atual++;
+
+    let porcentagem =
+    (atual/tempo)*100;
+
+    let barra =
+    document.getElementById("barraEdilsonCoco");
+
+    barra.style.width =
+    porcentagem + "%";
+
+    barra.innerText =
+    "🟤 " + Math.floor(porcentagem) + "%";
+
+    document.getElementById("status").innerText =
+    "😡 Edilson está fazendo cocô, espera " +
+    (tempo-atual) + " segundos";
+
+    if(atual>=tempo){
+
+      clearInterval(intervalo);
+
+      edilsonFazendo = false;
+
+      document.getElementById("status").innerText =
+      "🟤 Edilson terminou o cocô!";
+
+      verificarVazamento("coco");
+    }
+
+  },1000);
+
+}
+
+// TROCAR FRALDA
+
+function trocarFralda(nome){
+
+  if(nome==="Thiago" && thiagoFazendo){
+    document.getElementById("status").innerText =
+    "❌ Thiago ainda está fazendo xixi!";
+    return;
+  }
+
+  if(nome==="Emerson" && emersonFazendo){
+    document.getElementById("status").innerText =
+    "❌ Emerson ainda está fazendo cocô!";
+    return;
+  }
+
+  if(nome==="Edilson" && edilsonFazendo){
+    document.getElementById("status").innerText =
+    "❌ Edilson ainda está fazendo necessidade!";
+    return;
+  }
+
+  if(fraldas<=0){
+    document.getElementById("status").innerText =
+    "❌ Você não tem fraldas!";
+    return;
+  }
+
+  let etapas = [
+
+    "🧷 Tirando a fralda...",
+    "🧻 Passando lenço umedecido...",
+    "🌫️ Passando talco...",
+    "🧴 Passando pomada...",
+    "🎨 Escolhendo cor da fralda..."
+  ];
+
+  let i = 0;
+
+  let intervalo = setInterval(()=>{
+
+    document.getElementById("status").innerText =
+    etapas[i];
+
+    i++;
+
+    if(i>=etapas.length){
+
+      clearInterval(intervalo);
+
+      finalizarTroca(nome);
+    }
+
+  },2000);
+
+}
+
+function finalizarTroca(nome){
+
+  fraldas--;
+
+  atualizarItens();
+
+  let tipo =
+  document.getElementById("tipoFralda").value;
+
+  document.getElementById("status").innerText =
+  "🧷 " + nome +
+  " recebeu a fralda " + tipo;
+}
+
+// VAZAMENTO
+
+function verificarVazamento(tipo){
+
+  let tipoFralda =
+  document.getElementById("tipoFralda").value;
+
+  let vazou = false;
+
+  if(tipoFralda.includes("Padrão")){
+    vazou = true;
+  }
+
+  if(tipoFralda.includes("Personal") && tipo==="coco"){
+    vazou = true;
+  }
+
+  if(tipoFralda.includes("Turma") && tipo==="coco"){
+    vazou = true;
+  }
+
+  if(tipoFralda.includes("Huggies") && tipo==="xixi"){
+    vazou = true;
+  }
+
+  if(tipoFralda.includes("Piquitunho") && Math.random()<0.5){
+    vazou = true;
+  }
+
+  if(vazou){
+
+    setTimeout(()=>{
+
+      document.getElementById("status").innerText =
+      "🚨 A fralda vazou pq o bebê fez mais " +
+      tipo + "!";
+
+    },3000);
+
+  }
+
+}
+
+// LOJA
+
+function comprarFralda(){
+
+  let tipo =
+  document.getElementById("tipoFralda").value;
+
+  let preco = 0;
+
+  if(tipo.includes("Piquitunho")) preco = 1.99;
+  if(tipo.includes("Turma")) preco = 2.99;
+  if(tipo.includes("Huggies")) preco = 3.99;
+  if(tipo.includes("Personal")) preco = 4.99;
+  if(tipo.includes("Pampers")) preco = 9.99;
+
+  if(dinheiro < preco){
+
+    document.getElementById("status").innerText =
+    "❌ Dinheiro insuficiente!";
+    return;
+  }
+
+  dinheiro -= preco;
+
+  fraldas++;
+
+  atualizarItens();
+
+  document.getElementById("status").innerText =
+  "🛒 Comprou " + tipo;
+}
+
+function atualizarItens(){
+
+  document.getElementById("fraldas").innerText =
+  fraldas;
+
+  document.getElementById("dinheiro").innerText =
+  "💰 Dinheiro: " + dinheiro.toFixed(2);
+}
+
+// EVENTOS
+
+function eventoAleatorio(){
+
+  let eventos = [
+
+    "⚡ Falta de energia!",
+    "🌧️ Está chovendo!",
+    "😭 Os bebês começaram a chorar!",
+    "🧸 Brinquedos espalhados!",
+    "🎨 Parede rabiscada!"
+  ];
+
+  let evento =
+  eventos[Math.floor(Math.random()*eventos.length)];
+
+  document.getElementById("status").innerText =
+  evento;
+}
+
+function limparCasa(){
+
+  document.getElementById("status").innerText =
+  "🧹 Casa limpa!";
+}
+
+function dormir(){
+
+  document.getElementById("status").innerText =
+  "😴 Todos foram dormir...";
+}
+
+</script>
+
+</body>
+</html>
